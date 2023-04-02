@@ -19,6 +19,7 @@ public class Campeonato {
         int num_jogos = clubes.length * (clubes.length - 1);
         // Arranjo dos jogos 2 a 2 tem um tamanho igual ao num_jogos * 2
         Clube jogos[] = new Clube[num_jogos*2];
+        String tabela = "";
 
         for(int i = 0; i < clubes.length; i++) {
             for(int j = 0; j < clubes.length; j++) {
@@ -122,7 +123,7 @@ public class Campeonato {
     
     // imprimirPlacar:
     public void imprimirPlacar(String placar) {
-        System.out.println(placar);
+        System.out.print(placar);
         System.out.println("------------------------------------------------------------");
     }
 
@@ -143,12 +144,6 @@ public class Campeonato {
             }
         }
         return maior + 1;
-    }
-
-    // sortearJogos:
-    // Forma as rodadas de forma aleatória.
-    public void sortearJogos() {
-        Clube rodadas;
     }
 
     public String padRight(int num, String str) {
