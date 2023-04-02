@@ -160,7 +160,6 @@ public class Campeonato {
                 maior = (clubes[i+1].nome).length();
             }
         }
-        System.out.println(maior);
         return maior + 1;
     }
 
