@@ -101,12 +101,13 @@ public class Campeonato {
         }
         // Formando a String placar
         // tam: 6 pois é o tamanho do nome "Grupos";
-        placar += "Grupos" + imprimirEspacos(6) + "| Jogos | Pontos |  SG  |  V  |  E  |  D  \n";
+        placar += "Grupos" + imprimirEspacos(maior - 6) + "| Jogos | Pontos |  SG  |  V  |  E  |  D  \n";
         placar += "--------------------------------------------------------\n";
 
         for(int i = 0; i < clubes.length; i++) {
             placar += clubes[i].nome + imprimirEspacos(maior - clubes[i].nome.length());
             placar += "|  0";
+            
             if(isMinus10(clubes[i].jogos)) {
                 placar += "0";
             }
@@ -192,6 +193,12 @@ public class Campeonato {
         else {
             return 2;
         }
+    }
+
+    // sortearJogos:
+    // Forma as rodadas de forma aleatória.
+    public void sortearJogos() {
+        Clube rodadas;
     }
 }
 
