@@ -68,15 +68,15 @@ public class Campeonato {
 
         // Ordenando por pontos
         for(int i = 0; i < clubes.length; i++) {
-            j = 0;
+            j = i;
             while(j < clubes.length) {
                 if(j+1 == clubes.length) {
                     break;
                 }
-                if(clubes[j].pontos < clubes[j+1].pontos) {
-                    aux = clubes[j+1];
-                    clubes[j+1] = clubes[j];
-                    clubes[j] = aux;
+                if(clubes[i].pontos < clubes[j].pontos) {
+                    aux = clubes[j];
+                    clubes[j] = clubes[i];
+                    clubes[i] = aux;
                 }
                 j++;
             }
@@ -100,24 +100,13 @@ public class Campeonato {
 
         }
         // Formando a String placar
-        // tam: 6 pois é o tamanho do nome "Grupos";
-        placar += "Grupos" + imprimirEspacos(maior - 6) + "| Jogos | Pontos |  SG  |  V  |  E  |  D  \n";
-        placar += "--------------------------------------------------------\n";
+        placar += padRight(maior, "Grupos") + "| Jogos | Pontos |   SG   |  VI  |  EM  |  DE  \n";
+        placar += "------------------------------------------------------------\n";
 
         for(int i = 0; i < clubes.length; i++) {
-            placar += clubes[i].nome + imprimirEspacos(maior - clubes[i].nome.length());
-            placar += "|  0";
-            
-            if(isMinus10(clubes[i].jogos)) {
-                placar += "0";
-            }
-            placar += clubes[i].jogos + "  |   ";
-
-            if(isMinus10(clubes[i].pontos)) {
-                placar += "0";
-            }
-            placar += clubes[i].pontos + "   |";
-            placar += imprimirEspacos(checkSaldo(clubes[i].saldoGols)) + clubes[i].saldoGols + "  |  " + clubes[i].vitorias + "  |  " + clubes[i].empates + "  |  " + clubes[i].derrotas + "\n";
+            placar += padRight(maior, clubes[i].nome) + "|   " + padRight(2, "" + clubes[i].jogos);
+            placar += "  |  " + padLeft(3, "" + clubes[i].pontos)+ "   |  ";
+            placar += padLeft(3, "" + clubes[i].saldoGols) + "   |  " + padLeft(2, "" + clubes[i].vitorias) + "  |  " + padLeft(2, "" + clubes[i].empates) + "  |  " + padLeft(2, "" + clubes[i].derrotas) + "\n";
         }
 
         return placar;
@@ -131,18 +120,10 @@ public class Campeonato {
         System.out.println(campeao);
     }
     
-    // imprimirEspacos:
-    public String imprimirEspacos(int tam) {
-        String placar = "";
-        for(int k = 0; k <= tam; k++) {
-            placar += " ";
-        }
-        return placar;
-    }
     // imprimirPlacar:
     public void imprimirPlacar(String placar) {
         System.out.println(placar);
-        System.out.println("--------------------------------------------------------");
+        System.out.println("------------------------------------------------------------");
     }
 
     // getLargestName:
@@ -164,41 +145,18 @@ public class Campeonato {
         return maior + 1;
     }
 
-    // isMinus:
-    // Checa se o número passado é menor do que 10.
-    public boolean isMinus10(int numero) {
-        if(numero < 10) {
-            return true;
-        }
-        else {
-            return false;
-        }
-    }
-
-    // checkSaldo:
-    // Faz checagens no saldo de gols
-    public int checkSaldo(int saldo) {
-        // Se o saldo de gols for um inteiro negativo menor do que -9, ele ocupara 3 espaços na tabela.
-        // Assim, não precisamos adicionar espaços vazios.
-        if(saldo < -9) {
-            return 0;
-        }
-        // Se o saldo de gols for um inteiro negativo menor do que 0 ou um inteiro positivo maior do que 10.
-        // Ele ocupa 2 espaços na tabela, assim, temos que adicionar 1 espaço vazio.
-        else if(saldo < 0 || saldo > 9) {
-            return 1;
-        }
-        // Caso contrário, se ele for um inteiro positivo maior do que 0 e menor do que 10.
-        // Precisamos adicionar 2 espaços vazios, pois ele ocupa apenas 1 espaço na tabela.
-        else {
-            return 2;
-        }
-    }
-
     // sortearJogos:
     // Forma as rodadas de forma aleatória.
     public void sortearJogos() {
         Clube rodadas;
+    }
+
+    public String padRight(int num, String str) {
+        return String.format("%-" + num + "s", str);
+    }
+
+    public String padLeft(int num, String str) {
+        return String.format("%" + num + "s", str);
     }
 }
 
