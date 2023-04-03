@@ -10,7 +10,6 @@ public class Teste {
         clubes[5] = new Clube("São Paulo");
         clubes[6] = new Clube("Vasco");
     
-    
         Campeonato brasileirao = new Campeonato(clubes);
         brasileirao.jogarCampeonato();
         brasileirao.imprimirPlacar(brasileirao.getClassificacao(brasileirao.getLargestName()));

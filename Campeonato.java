@@ -19,7 +19,6 @@ public class Campeonato {
         int num_jogos = clubes.length * (clubes.length - 1);
         // Arranjo dos jogos 2 a 2 tem um tamanho igual ao num_jogos * 2
         Clube jogos[] = new Clube[num_jogos*2];
-        String tabela = "";
 
         for(int i = 0; i < clubes.length; i++) {
             for(int j = 0; j < clubes.length; j++) {
@@ -69,11 +68,8 @@ public class Campeonato {
 
         // Ordenando por pontos
         for(int i = 0; i < clubes.length; i++) {
-            j = i;
+            j = i + 1;
             while(j < clubes.length) {
-                if(j+1 == clubes.length) {
-                    break;
-                }
                 if(clubes[i].pontos < clubes[j].pontos) {
                     aux = clubes[j];
                     clubes[j] = clubes[i];
@@ -86,15 +82,12 @@ public class Campeonato {
 
         // Ordenando por saldo
         for(int i = 0; i < clubes.length; i++) {
-            j = 0;
+            j = i + 1;
             while(j < clubes.length) {
-                if(j+1 == clubes.length) {
-                    break;
-                }
-                if(clubes[j].pontos == clubes[j+1].pontos && clubes[j].saldoGols < clubes[j+1].saldoGols) {
-                    aux = clubes[j+1];
-                    clubes[j+1] = clubes[j];
-                    clubes[j] = aux;
+                if(clubes[i].pontos == clubes[j].pontos && clubes[i].saldoGols < clubes[j].saldoGols) {
+                    aux = clubes[j];
+                    clubes[j] = clubes[i];
+                    clubes[i] = aux;
                 }
                 j++;
             }
